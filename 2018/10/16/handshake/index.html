@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="TCP 没那么难吧">
+<meta name="description" content="TCP 没那么难吧TCP/IP协议三次握手与四次握手流程解析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="handshake">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/handshake/index.html">
 <meta property="og:site_name" content="xiehuan">
-<meta property="og:description" content="TCP 没那么难吧">
+<meta property="og:description" content="TCP 没那么难吧TCP/IP协议三次握手与四次握手流程解析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-16T10:19:11.137Z">
+<meta property="og:image" content="https://www.2cto.com/uploadfile/2013/1022/20131022025345890.png">
+<meta property="og:image" content="http://www.2cto.com/uploadfile/2013/1022/20131022025346218.png">
+<meta property="og:updated_time" content="2018-10-17T04:02:03.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="handshake">
-<meta name="twitter:description" content="TCP 没那么难吧">
+<meta name="twitter:description" content="TCP 没那么难吧TCP/IP协议三次握手与四次握手流程解析">
+<meta name="twitter:image" content="https://www.2cto.com/uploadfile/2013/1022/20131022025345890.png">
 
 
 
@@ -339,7 +342,9 @@
       
 
       
-        <p><a href="http://network.51cto.com/art/201808/582450.htm" target="_blank" rel="noopener">TCP 没那么难吧</a></p>
+        <p><a href="http://network.51cto.com/art/201808/582450.htm" target="_blank" rel="noopener">TCP 没那么难吧</a><br><a href="https://www.cnblogs.com/kex1n/p/7401811.html" target="_blank" rel="noopener">TCP/IP协议三次握手与四次握手流程解析</a><br><a id="more"></a></p>
+<h1 id="TCP报文-格式"><a href="#TCP报文-格式" class="headerlink" title="TCP报文 格式"></a>TCP报文 格式</h1><p><img src="https://www.2cto.com/uploadfile/2013/1022/20131022025345890.png" alt="TCP报文格式"><br>序号：seq，用来标识从TCP源头向目的端发送的字节流，发送方发送数据时对数据进行标记；<br>确认序号：ack，只有ACK标志位为1时，确认序号序号才有效，ack=seq+1；<br>标志位：URG、ACK、PSH、RST、SYN、FIN<br>URG：<br>（A）URG：紧急指针（urgent pointer）有效。<br>（B）ACK：确认序号有效。<br>（C）PSH：接收方应该尽快将这个报文交给应用层。<br>（D）RST：重置连接。<br>（E）SYN：发起一个新连接。<br>（F）FIN：释放一个连接。<br>需要注意的是：<br>（A）不要将确认序号Ack与标志位中的ACK搞混了。<br>（B）确认方Ack=发起方Req+1，两端配对。<br>TCP三次握手图解<br><img src="http://www.2cto.com/uploadfile/2013/1022/20131022025346218.png" alt="TCP三次握手图解"></p>
+<p>第一次握手:client将SYN置为1，随机产生一个seq=x，向server发送，client进入SYN——SEND状态，登台server确认；<br>第二次握手：server收到数据包，根据SYN=1知道client想要建立连接，server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态<br>第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了</p>
 
       
     </div>
@@ -428,8 +433,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,6 +499,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP报文-格式"><span class="nav-number">1.</span> <span class="nav-text">TCP报文 格式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
