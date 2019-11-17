@@ -259,6 +259,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/Spring-IOC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiehuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiehuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/14/Spring-IOC/" itemprop="url">Spring IOC</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T22:43:43+08:00">
+                2019-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>AbstractApplicationContext 的refresh方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br></pre></td><td class="code"><pre><span class="line">	@Override</span><br><span class="line">	public void refresh() throws BeansException, IllegalStateException &#123;</span><br><span class="line">		synchronized (this.startupShutdownMonitor) &#123;</span><br><span class="line">			// Prepare this context for refreshing.</span><br><span class="line">			prepareRefresh();</span><br><span class="line"></span><br><span class="line">			// Tell the subclass to refresh the internal bean factory.</span><br><span class="line">			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line"></span><br><span class="line">			// Prepare the bean factory for use in this context.</span><br><span class="line">			prepareBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">			try &#123;</span><br><span class="line">				// Allows post-processing of the bean factory in context subclasses.</span><br><span class="line">				postProcessBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">				// Invoke factory processors registered as beans in the context.</span><br><span class="line">				invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line">				// Register bean processors that intercept bean creation.</span><br><span class="line">				registerBeanPostProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line">				// Initialize message source for this context.</span><br><span class="line">				initMessageSource();</span><br><span class="line"></span><br><span class="line">				// Initialize event multicaster for this context.</span><br><span class="line">				initApplicationEventMulticaster();</span><br><span class="line"></span><br><span class="line">				// Initialize other special beans in specific context subclasses.</span><br><span class="line">				onRefresh();</span><br><span class="line"></span><br><span class="line">				// Check for listener beans and register them.</span><br><span class="line">				registerListeners();</span><br><span class="line"></span><br><span class="line">				// Instantiate all remaining (non-lazy-init) singletons.</span><br><span class="line">				finishBeanFactoryInitialization(beanFactory);</span><br><span class="line"></span><br><span class="line">				// Last step: publish corresponding event.</span><br><span class="line">				finishRefresh();</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			catch (BeansException ex) &#123;</span><br><span class="line">				if (logger.isWarnEnabled()) &#123;</span><br><span class="line">					logger.warn(&quot;Exception encountered during context initialization - &quot; +</span><br><span class="line">							&quot;cancelling refresh attempt: &quot; + ex);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				// Destroy already created singletons to avoid dangling resources.</span><br><span class="line">				destroyBeans();</span><br><span class="line"></span><br><span class="line">				// Reset &apos;active&apos; flag.</span><br><span class="line">				cancelRefresh(ex);</span><br><span class="line"></span><br><span class="line">				// Propagate exception to caller.</span><br><span class="line">				throw ex;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			finally &#123;</span><br><span class="line">				// Reset common introspection caches in Spring&apos;s core, since we</span><br><span class="line">				// might not ever need metadata for singleton beans anymore...</span><br><span class="line">				resetCommonCaches();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	protected void prepareRefresh() &#123;</span><br><span class="line">		//</span><br><span class="line">		this.startupDate = System.currentTimeMillis();</span><br><span class="line">		//context是否关闭的标志，设置为false</span><br><span class="line">		this.closed.set(false);</span><br><span class="line">		//ontext是否激活的标志，设置为true</span><br><span class="line">		this.active.set(true);</span><br><span class="line"></span><br><span class="line">		if (logger.isInfoEnabled()) &#123;</span><br><span class="line">			logger.info(&quot;Refreshing &quot; + this);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// 在上下文环境中初始化任何占位符属性源()</span><br><span class="line">		//际上AbstractApplicationContext类中的initPropertySources都是为空的 在它的子类中</span><br><span class="line">	    //才去做真正的加载资源操作 调用的是WebApplicationContextUtils.initServletPropertySources方法</span><br><span class="line">		initPropertySources();</span><br><span class="line"></span><br><span class="line">		// 验证标记为所需的所有属性都是可解析的</span><br><span class="line">		// 查看 ConfigurablePropertyResolver#setRequiredProperties</span><br><span class="line">		//ConfigurablePropertyResolver 只是一个接口类，具体完成验证功能的是它的实现类：AbstractPropertyResolver</span><br><span class="line">		//在validateRequiredProperties方法中，会去验证requiredProperties对应的key是否存在对应的环境变量，如果不存在就报错</span><br><span class="line">		getEnvironment().validateRequiredProperties();</span><br><span class="line"></span><br><span class="line">		// 储存监听器</span><br><span class="line">		if (this.earlyApplicationListeners == null) &#123;</span><br><span class="line">			this.earlyApplicationListeners = new LinkedHashSet&lt;&gt;(this.applicationListeners);</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			// 重置监听器</span><br><span class="line">			this.applicationListeners.clear();</span><br><span class="line">			this.applicationListeners.addAll(this.earlyApplicationListeners);</span><br><span class="line">		&#125;</span><br><span class="line">		// 有留给子类扩展的位置，用来将属性加入到applicationContext中</span><br><span class="line">		this.earlyApplicationEvents = new LinkedHashSet&lt;ApplicationEvent&gt;();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/** </span><br><span class="line">	 * 用实际实例替换任何存根属性源。</span><br><span class="line">	 * &lt;p&gt;Replace any stub property sources with actual instances.</span><br><span class="line">	 * @see org.springframework.core.env.PropertySource.StubPropertySource</span><br><span class="line">	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources</span><br><span class="line">	 */</span><br><span class="line">	protected void initPropertySources() &#123;</span><br><span class="line">		// 对于子类：默认情况下不执行任何操作</span><br><span class="line">	&#125;</span><br><span class="line">	//这个方法主要做的事情就是把从servlet中得到的配置信息放到context的环境变量数据，这样spring就可以从context对应的key取得对应的变量</span><br><span class="line">	//org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources</span><br><span class="line">	public static void initServletPropertySources(MutablePropertySources sources,</span><br><span class="line">			@Nullable ServletContext servletContext, @Nullable ServletConfig servletConfig) &#123;</span><br><span class="line"></span><br><span class="line">		Assert.notNull(sources, &quot;&apos;propertySources&apos; must not be null&quot;);</span><br><span class="line">		String name = StandardServletEnvironment.SERVLET_CONTEXT_PROPERTY_SOURCE_NAME;</span><br><span class="line">		if (servletContext != null &amp;&amp; sources.contains(name) &amp;&amp; sources.get(name) instanceof StubPropertySource) &#123;</span><br><span class="line">			sources.replace(name, new ServletContextPropertySource(name, servletContext));</span><br><span class="line">		&#125;</span><br><span class="line">		name = StandardServletEnvironment.SERVLET_CONFIG_PROPERTY_SOURCE_NAME;</span><br><span class="line">		if (servletConfig != null &amp;&amp; sources.contains(name) &amp;&amp; sources.get(name) instanceof StubPropertySource) &#123;</span><br><span class="line">			sources.replace(name, new ServletConfigPropertySource(name, servletConfig));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">		@Override</span><br><span class="line">	public void validateRequiredProperties() &#123;</span><br><span class="line">		MissingRequiredPropertiesException ex = new MissingRequiredPropertiesException();</span><br><span class="line">		for (String key : this.requiredProperties) &#123;</span><br><span class="line">			if (this.getProperty(key) == null) &#123;</span><br><span class="line">				ex.addMissingRequiredProperty(key);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!ex.getMissingRequiredProperties().isEmpty()) &#123;</span><br><span class="line">			throw ex;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * obtainFreshBeanFactory调用了refreshBeanFactory方法，AbstractRefreshableApplicationContext和</span><br><span class="line">	 GenericApplicationContext 继承了AbstractApplicationContext类，实现了refreshBeanFactory()这个抽象</span><br><span class="line">	 方法。在两个类中，创建的beanFactory均是DefaultListableBeanFactory</span><br><span class="line">	 */</span><br><span class="line">	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() &#123;</span><br><span class="line">		refreshBeanFactory();</span><br><span class="line">		ConfigurableListableBeanFactory beanFactory = getBeanFactory();</span><br><span class="line">		if (logger.isDebugEnabled()) &#123;</span><br><span class="line">			logger.debug(&quot;Bean factory for &quot; + getDisplayName() + &quot;: &quot; + beanFactory);</span><br><span class="line">		&#125;</span><br><span class="line">		return beanFactory;</span><br><span class="line">	&#125;</span><br><span class="line">	//此实现执行此上下文的底层bean工厂的实际刷新，关闭前一个bean工厂（如果有的话）并为上下文生命周期的下一阶段初始化一个新的bean工厂。</span><br><span class="line">	//@see org.springframework.context.support.AbstractRefreshableApplicationContext#refreshBeanFactory</span><br><span class="line">	@Override</span><br><span class="line">	protected final void refreshBeanFactory() throws BeansException &#123;</span><br><span class="line">		//如果BeanFactory存在，销毁 ccontext管理的Bean，关闭掉BeanFactory</span><br><span class="line">		if (hasBeanFactory()) &#123;</span><br><span class="line">			destroyBeans();</span><br><span class="line">			closeBeanFactory();</span><br><span class="line">		&#125;</span><br><span class="line">		try &#123;</span><br><span class="line">			DefaultListableBeanFactory beanFactory = createBeanFactory();</span><br><span class="line">			beanFactory.setSerializationId(getId());</span><br><span class="line">			customizeBeanFactory(beanFactory);</span><br><span class="line">			loadBeanDefinitions(beanFactory);</span><br><span class="line">			synchronized (this.beanFactoryMonitor) &#123;</span><br><span class="line">				this.beanFactory = beanFactory;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		catch (IOException ex) &#123;</span><br><span class="line">			throw new ApplicationContextException(&quot;I/O error parsing bean definition source for &quot; + getDisplayName(), ex);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	/**</span><br><span class="line">	为context创建一个内部 beanFactory，当调用refresh()方法时调用此方法 ，默认创建一个DefaultListableBeanFactory</span><br><span class="line">	将getInternalParentBeanFactory的父级作为内部的beanFactory</span><br><span class="line">	 * @return the bean factory for this context</span><br><span class="line">	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowBeanDefinitionOverriding</span><br><span class="line">	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowEagerClassLoading</span><br><span class="line">	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowCircularReferences</span><br><span class="line">	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowRawInjectionDespiteWrapping</span><br><span class="line">	 */</span><br><span class="line">	protected DefaultListableBeanFactory createBeanFactory() &#123;</span><br><span class="line">		return new DefaultListableBeanFactory(getInternalParentBeanFactory());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) &#123;</span><br><span class="line">		if (this.allowBeanDefinitionOverriding != null) &#123;</span><br><span class="line">			//allowBeanDefinitionOverriding表示是否允许注册一个同名的类来覆盖原有类(注意是类，不是实例)</span><br><span class="line">			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);</span><br><span class="line">		&#125;</span><br><span class="line">		if (this.allowCircularReferences != null) &#123;</span><br><span class="line">			//allowCircularReferences表示是否运行多个类之间的循环引用</span><br><span class="line">			beanFactory.setAllowCircularReferences(this.allowCircularReferences);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * Load bean definitions into the given bean factory, typically through</span><br><span class="line">	 * delegating to one or more bean definition readers.</span><br><span class="line">	 * @param beanFactory the bean factory to load bean definitions into</span><br><span class="line">	 * @throws BeansException if parsing of the bean definitions failed</span><br><span class="line">	 * @throws IOException if loading of bean definition files failed</span><br><span class="line">	 * @see org.springframework.beans.factory.support.PropertiesBeanDefinitionReader</span><br><span class="line">	 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader</span><br><span class="line">	 */</span><br><span class="line">	protected abstract void loadBeanDefinitions(DefaultListableBeanFactory beanFactory)</span><br><span class="line">			throws BeansException, IOException;</span><br><span class="line">refreshBeanFactory()调用的loadBeanDefinitions(beanFactory)方法，在AbstractRefreshableApplicationContext类中只是一个接口，</span><br><span class="line">需要各个子类各自实现</span><br><span class="line">以AbstractXmlApplicationContext为例</span><br><span class="line">	/**</span><br><span class="line">	 * Load the bean definitions with the given XmlBeanDefinitionReader.</span><br><span class="line">	 * &lt;p&gt;The lifecycle of the bean factory is handled by the &#123;@link #refreshBeanFactory&#125;</span><br><span class="line">	 * method; hence this method is just supposed to load and/or register bean definitions.</span><br><span class="line">	 * @param reader the XmlBeanDefinitionReader to use</span><br><span class="line">	 * @throws BeansException in case of bean registration errors</span><br><span class="line">	 * @throws IOException if the required XML document isn&apos;t found</span><br><span class="line">	 * @see #refreshBeanFactory</span><br><span class="line">	 * @see #getConfigLocations</span><br><span class="line">	 * @see #getResources</span><br><span class="line">	 * @see #getResourcePatternResolver</span><br><span class="line">	 */</span><br><span class="line">	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException &#123;</span><br><span class="line">		Resource[] configResources = getConfigResources();</span><br><span class="line">		if (configResources != null) &#123;</span><br><span class="line">			reader.loadBeanDefinitions(configResources);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] configLocations = getConfigLocations();</span><br><span class="line">		if (configLocations != null) &#123;</span><br><span class="line">			reader.loadBeanDefinitions(configLocations);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">getConfigResources()与getConfigLocations()方法代表了两种路径加载模式</span><br><span class="line">	//这种方式 使用了getConfigLocations()方式加载xml文件</span><br><span class="line">	public ClassPathXmlApplicationContext(</span><br><span class="line">			String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)</span><br><span class="line">			throws BeansException &#123;</span><br><span class="line"></span><br><span class="line">		super(parent);</span><br><span class="line">		setConfigLocations(configLocations);</span><br><span class="line">		if (refresh) &#123;</span><br><span class="line">			refresh();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//使用了getConfigResources()方式加载</span><br><span class="line">	public ClassPathXmlApplicationContext(String[] paths, Class&lt;?&gt; clazz, @Nullable ApplicationContext parent)</span><br><span class="line">			throws BeansException &#123;</span><br><span class="line"></span><br><span class="line">		super(parent);</span><br><span class="line">		Assert.notNull(paths, &quot;Path array must not be null&quot;);</span><br><span class="line">		Assert.notNull(clazz, &quot;Class argument must not be null&quot;);</span><br><span class="line">		this.configResources = new Resource[paths.length];</span><br><span class="line">		for (int i = 0; i &lt; paths.length; i++) &#123;</span><br><span class="line">			this.configResources[i] = new ClassPathResource(paths[i], clazz);</span><br><span class="line">		&#125;</span><br><span class="line">		refresh();</span><br><span class="line">	&#125;</span><br><span class="line">使用了不同的ClassPathXmlApplicationContext 构造方法，就会调用不同的方法来加载xml文件</span><br><span class="line"></span><br><span class="line">最终会调用XmlBeanDefinitionReader的loadBeanDefinitions方法</span><br><span class="line">	/**</span><br><span class="line">	 * Load bean definitions from the specified XML file.</span><br><span class="line">	 * @param encodedResource the resource descriptor for the XML file,</span><br><span class="line">	 * allowing to specify an encoding to use for parsing the file</span><br><span class="line">	 * @return the number of bean definitions found</span><br><span class="line">	 * @throws BeanDefinitionStoreException in case of loading or parsing errors</span><br><span class="line">	 */</span><br><span class="line">	public int loadBeanDefinitions(EncodedResource encodedResource) throws BeanDefinitionStoreException &#123;</span><br><span class="line">		Assert.notNull(encodedResource, &quot;EncodedResource must not be null&quot;);</span><br><span class="line">		if (logger.isInfoEnabled()) &#123;</span><br><span class="line">			logger.info(&quot;Loading XML bean definitions from &quot; + encodedResource);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Set&lt;EncodedResource&gt; currentResources = this.resourcesCurrentlyBeingLoaded.get();</span><br><span class="line">		if (currentResources == null) &#123;</span><br><span class="line">			currentResources = new HashSet&lt;&gt;(4);</span><br><span class="line">			this.resourcesCurrentlyBeingLoaded.set(currentResources);</span><br><span class="line">		&#125;</span><br><span class="line">		if (!currentResources.add(encodedResource)) &#123;</span><br><span class="line">			throw new BeanDefinitionStoreException(</span><br><span class="line">					&quot;Detected cyclic loading of &quot; + encodedResource + &quot; - check your import definitions!&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		try &#123;</span><br><span class="line">			InputStream inputStream = encodedResource.getResource().getInputStream();</span><br><span class="line">			try &#123;</span><br><span class="line">				InputSource inputSource = new InputSource(inputStream);</span><br><span class="line">				if (encodedResource.getEncoding() != null) &#123;</span><br><span class="line">					inputSource.setEncoding(encodedResource.getEncoding());</span><br><span class="line">				&#125;</span><br><span class="line">				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());</span><br><span class="line">			&#125;</span><br><span class="line">			finally &#123;</span><br><span class="line">				inputStream.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		catch (IOException ex) &#123;</span><br><span class="line">			throw new BeanDefinitionStoreException(</span><br><span class="line">					&quot;IOException parsing XML document from &quot; + encodedResource.getResource(), ex);</span><br><span class="line">		&#125;</span><br><span class="line">		finally &#123;</span><br><span class="line">			currentResources.remove(encodedResource);</span><br><span class="line">			if (currentResources.isEmpty()) &#123;</span><br><span class="line">				this.resourcesCurrentlyBeingLoaded.remove();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">而 XXXXXXContext实现类中的loadBeanDefinitions实际上是由XXXXXXBeanDefinitionReader和XXXXXXBeanDefinitionScanner完成的</span><br><span class="line">实现的</span><br><span class="line">以方法上面的XmlBeanDefinitionReader为例，XmlBeanDefinitionReader继承了AbstractBeanDefinitionReader类，</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1480,152 +1600,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/poi操作excel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiehuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiehuan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/11/poi操作excel/" itemprop="url">poi操作excel</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T15:34:53+08:00">
-                2018-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Java使用poi动态生成表格头，合并列，合并行<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/11/poi操作excel/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1676,7 +1650,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
