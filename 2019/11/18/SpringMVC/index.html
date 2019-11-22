@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xiehuan.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xiehuan.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC">
+<meta property="og:url" content="http://yoursite.com/2019/11/18/SpringMVC/index.html">
+<meta property="og:site_name" content="xiehuan">
+<meta property="og:description" content="SpringMVC">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-21T14:51:07.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC">
+<meta name="twitter:description" content="SpringMVC">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/18/SpringMVC/"/>
+
+
+
+
+
+  <title>SpringMVC | xiehuan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiehuan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/SpringMVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiehuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiehuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SpringMVC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-18T19:55:43+08:00">
+                2019-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>SpringMVC<br><a id="more"></a><br>说到SpringMVC的启动过程，就要讲讲tomcat加载的过程了(这里只主要讲tomcat是怎么加载spring项目的)</p>
+<p>Bootstrap类<br>LifecycleBase的start()方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startInternal();//第150行</span><br></pre></td></tr></table></figure></p>
+<p>StandardContext继承了LifecycleBase类，并  重写startInternal这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// Configure and call application event listeners 5254行</span><br><span class="line">if (ok) &#123;</span><br><span class="line">    if (!listenerStart()) &#123;</span><br><span class="line">        log.error(sm.getString(&quot;standardContext.listenerFail&quot;));</span><br><span class="line">        ok = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里调用了listenerStart()方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Configure the set of instantiated application event listeners</span><br><span class="line"> * for this Context.</span><br><span class="line"> * @return &lt;code&gt;true&lt;/code&gt; if all listeners wre</span><br><span class="line"> * initialized successfully, or &lt;code&gt;false&lt;/code&gt; otherwise.</span><br><span class="line"> */</span><br><span class="line">public boolean listenerStart() &#123;</span><br><span class="line"></span><br><span class="line">    if (log.isDebugEnabled())</span><br><span class="line">        log.debug(&quot;Configuring application event listeners&quot;);</span><br><span class="line"></span><br><span class="line">    // Instantiate the required listeners</span><br><span class="line">    String listeners[] = findApplicationListeners();</span><br><span class="line">    Object results[] = new Object[listeners.length];</span><br><span class="line">    boolean ok = true;</span><br><span class="line">    for (int i = 0; i &lt; results.length; i++) &#123;</span><br><span class="line">        if (getLogger().isDebugEnabled())</span><br><span class="line">            getLogger().debug(&quot; Configuring event listener class &apos;&quot; +</span><br><span class="line">                listeners[i] + &quot;&apos;&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            String listener = listeners[i];</span><br><span class="line">            results[i] = getInstanceManager().newInstance(listener);</span><br><span class="line">        &#125; catch (Throwable t) &#123;</span><br><span class="line">            t = ExceptionUtils.unwrapInvocationTargetException(t);</span><br><span class="line">            ExceptionUtils.handleThrowable(t);</span><br><span class="line">            getLogger().error(sm.getString(</span><br><span class="line">                    &quot;standardContext.applicationListener&quot;, listeners[i]), t);</span><br><span class="line">            ok = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!ok) &#123;</span><br><span class="line">        getLogger().error(sm.getString(&quot;standardContext.applicationSkipped&quot;));</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Sort listeners in two arrays</span><br><span class="line">    ArrayList&lt;Object&gt; eventListeners = new ArrayList&lt;&gt;();</span><br><span class="line">    ArrayList&lt;Object&gt; lifecycleListeners = new ArrayList&lt;&gt;();</span><br><span class="line">    for (int i = 0; i &lt; results.length; i++) &#123;</span><br><span class="line">        if ((results[i] instanceof ServletContextAttributeListener)</span><br><span class="line">            || (results[i] instanceof ServletRequestAttributeListener)</span><br><span class="line">            || (results[i] instanceof ServletRequestListener)</span><br><span class="line">            || (results[i] instanceof HttpSessionIdListener)</span><br><span class="line">            || (results[i] instanceof HttpSessionAttributeListener)) &#123;</span><br><span class="line">            eventListeners.add(results[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        if ((results[i] instanceof ServletContextListener)</span><br><span class="line">            || (results[i] instanceof HttpSessionListener)) &#123;</span><br><span class="line">            lifecycleListeners.add(results[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Listener instances may have been added directly to this Context by</span><br><span class="line">    // ServletContextInitializers and other code via the pluggability APIs.</span><br><span class="line">    // Put them these listeners after the ones defined in web.xml and/or</span><br><span class="line">    // annotations then overwrite the list of instances with the new, full</span><br><span class="line">    // list.</span><br><span class="line">    for (Object eventListener: getApplicationEventListeners()) &#123;</span><br><span class="line">        eventListeners.add(eventListener);</span><br><span class="line">    &#125;</span><br><span class="line">    setApplicationEventListeners(eventListeners.toArray());</span><br><span class="line">    for (Object lifecycleListener: getApplicationLifecycleListeners()) &#123;</span><br><span class="line">        lifecycleListeners.add(lifecycleListener);</span><br><span class="line">        if (lifecycleListener instanceof ServletContextListener) &#123;</span><br><span class="line">            noPluggabilityListeners.add(lifecycleListener);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setApplicationLifecycleListeners(lifecycleListeners.toArray());</span><br><span class="line"></span><br><span class="line">    // Send application start events</span><br><span class="line"></span><br><span class="line">    if (getLogger().isDebugEnabled())</span><br><span class="line">        getLogger().debug(&quot;Sending application start events&quot;);</span><br><span class="line"></span><br><span class="line">    // Ensure context is not null</span><br><span class="line">    getServletContext();</span><br><span class="line">    context.setNewServletContextListenerAllowed(false);</span><br><span class="line"></span><br><span class="line">    Object instances[] = getApplicationLifecycleListeners();</span><br><span class="line">    if (instances == null || instances.length == 0) &#123;</span><br><span class="line">        return ok;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ServletContextEvent event = new ServletContextEvent(getServletContext());</span><br><span class="line">    ServletContextEvent tldEvent = null;</span><br><span class="line">    if (noPluggabilityListeners.size() &gt; 0) &#123;</span><br><span class="line">        noPluggabilityServletContext = new NoPluggabilityServletContext(getServletContext());</span><br><span class="line">        tldEvent = new ServletContextEvent(noPluggabilityServletContext);</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; instances.length; i++) &#123;</span><br><span class="line">        if (!(instances[i] instanceof ServletContextListener))</span><br><span class="line">            continue;</span><br><span class="line">        ServletContextListener listener =</span><br><span class="line">            (ServletContextListener) instances[i];</span><br><span class="line">        try &#123;</span><br><span class="line">            fireContainerEvent(&quot;beforeContextInitialized&quot;, listener);</span><br><span class="line">            if (noPluggabilityListeners.contains(listener)) &#123;</span><br><span class="line">                listener.contextInitialized(tldEvent);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                listener.contextInitialized(event);</span><br><span class="line">            &#125;</span><br><span class="line">            fireContainerEvent(&quot;afterContextInitialized&quot;, listener);</span><br><span class="line">        &#125; catch (Throwable t) &#123;</span><br><span class="line">            ExceptionUtils.handleThrowable(t);</span><br><span class="line">            fireContainerEvent(&quot;afterContextInitialized&quot;, listener);</span><br><span class="line">            getLogger().error</span><br><span class="line">                (sm.getString(&quot;standardContext.listenerStart&quot;,</span><br><span class="line">                              instances[i].getClass().getName()), t);</span><br><span class="line">            ok = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return (ok);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个方法里面，调用了ContextLoaderListener类的contextInitialized方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Initialize the root web application context.</span><br><span class="line"> */</span><br><span class="line">@Override</span><br><span class="line">public void contextInitialized(ServletContextEvent event) &#123;</span><br><span class="line">	initWebApplicationContext(event.getServletContext());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>contextInitialized 方法调用了父类的initWebApplicationContext方法，开始初始化context</p>
+<p><strong>简述：tomcat调用了ContextLoaderListener类的contextInitialized方法</strong></p>
+<p>这个时候就要问了，这样来看的说web.xml文件是在什么时候加载的呢</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/14/Spring-IOC/" rel="next" title="Spring IOC">
+                <i class="fa fa-chevron-left"></i> Spring IOC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/22/IDEA快捷键/" rel="prev" title="IDEA快捷键">
+                IDEA快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xiehuan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiehuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+       <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
