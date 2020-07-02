@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14105949-52c5b0b0956a4991.png?imageMogr2/auto-orient/strip|imageView2/2/w/870/format/webp">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-5522483/zmzre4hkcc.png?imageView2/2/w/1620">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5982616-aad63782162c9ae5.png?imageMogr2/auto-orient/strip|imageView2/2/w/942/format/webp">
-<meta property="og:updated_time" content="2019-12-21T12:36:04.152Z">
+<meta property="og:updated_time" content="2020-01-02T13:50:42.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM第一篇">
 <meta name="twitter:description" content="关于Java虚拟机的一些记录">
@@ -364,7 +364,7 @@
 <ol>
 <li>局部变量表<br>用来存放方法参数和方法内部定义的局部变量。在class文件中，方法的Code属性的max_locals数据项中确定了该方法分配的最大容量。以变量槽(Slot)为单位。<br>一个Slot可以存放32位以内的数据类型（6种Java基本数据类型，以及reference（对象引用），returnAddress(指向； 一条字节码指令的地址)）<br>long以及double需要两个Slot。局部变量不像类变量一样存在准备阶段，如果没有赋值，是不能被使用的。</li>
 <li>操作数栈<br>操作栈，后入先出。在方法开始执行时，栈为空；在执行过程中，会把字节码指令写入栈中和取出</li>
-<li>动态连接<br>class文件中的常量池存在大量符号引用，这些符号引用一部分在类加载阶段或者第一次使用时转化为直接引用，这种转化称为静态解析（方法的重载）；<br>另外在每一次运行时转化为直接引用，这部分称为动态连接（方法的重写）。</li>
+<li>动态连接<br>class文件中的常量池存在大量符号引用，这些符号引用一部分在类加载阶段或者第一次使用时转化为直接引用，这种转化称为静态解析（方法的重载）；<br>另外一部分在每一次运行时转化为直接引用，这部分称为动态连接（方法的重写）。</li>
 <li>方法返回地址<br>正常完成出口与异常完成出口在方法退出之前，都需要返回到方法被调用的位置。<br>正常退出时，调用者的PC计数器的值可以作为返回地址；异常退出时，返回地址需要通过异常处理器表确定。</li>
 <li>附加信息</li>
 </ol>
@@ -605,7 +605,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
